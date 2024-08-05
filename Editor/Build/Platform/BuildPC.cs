@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 
@@ -41,7 +41,10 @@ namespace SuperUnityBuild.BuildTool
             {
                 architectures = new BuildArchitecture[] {
                     new BuildArchitecture(BuildTarget.StandaloneWindows, "Windows x86", true, _binaryNameFormats[0]),
-                    new BuildArchitecture(BuildTarget.StandaloneWindows64, "Windows x64", false, _binaryNameFormats[0])
+                    new BuildArchitecture(BuildTarget.StandaloneWindows64, "Windows x64", false, _binaryNameFormats[0]),
+#if UNITY_2023_1_OR_NEWER
+                    new BuildArchitecture(BuildTarget.StandaloneWindows64, "Windows x64 ARM", false, _binaryNameFormats[0], true)
+#endif
                 };
             }
 

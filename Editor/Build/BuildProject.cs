@@ -240,6 +240,17 @@ namespace SuperUnityBuild.BuildTool
             // Apply build variant
             platform.ApplyVariant();
 
+#if UNITY_STANDALONE_WIN && UNITY_2023_1_OR_NEWER
+            if (architecture.isARM)
+            {
+                UnityEditor.WindowsStandalone.UserBuildSettings.architecture = UnityEditor.Build.OSArchitecture.ARM64;
+            }
+            else
+            {
+                UnityEditor.WindowsStandalone.UserBuildSettings.architecture = UnityEditor.Build.OSArchitecture.x64;
+            }
+#endif
+
             // Generate BuildConstants
             BuildConstantsGenerator.Generate(buildTime, constantsFileLocation, BuildSettings.productParameters.buildVersion,
                 releaseType, platform, scriptingBackend, architecture, distribution);
@@ -547,6 +558,6 @@ namespace SuperUnityBuild.BuildTool
                 }
             }
         }
-        #endregion
+#endregion
     }
 }
